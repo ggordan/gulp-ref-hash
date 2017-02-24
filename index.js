@@ -34,14 +34,16 @@ module.exports = function(options) {
       this.emit('error', new gutil.PluginError('gulp-ref-hash', 'Streaming not supported.'));
       return callback();
     }
+    var content = file.contents.toString();
+    var linefeed = /\r\n/g.test(content) ? '\r\n' : '\n';
 
-    var contents = file.contents.toString().split('\n').map(function (line) {
-      if (matches = line.match(/<!--\s*build:(\w+)(?:\(([^\)]+)\))?\s*([^\s]+)?\s*-->/)) {
-        extension = matches[1];
-        line = hashifyLine(options.paths[extension], extension);
-      }
-      return line;
-    }).join('\n');
+    var contents = content.split(linefeed).map(function(line) {
+        if (matches = line.match(/<!--\s*build:(\w+)(?:\(([^\)]+)\))?\s*([^\s]+)?\s*-->/)) {
+            extension = matches[1];
+            line = hashifyLine(options.paths[extension], extension);
+        }
+        return line;
+    }).join(linefeed);
 
     file.contents = new Buffer(contents);
     this.push(file);
