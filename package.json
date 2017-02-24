@@ -1,6 +1,6 @@
 {
   "name": "gulp-ref-hash",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Generates a hashed name for assets concatenated using the useref build block.",
   "main": "index.js",
   "repository": {
@@ -11,6 +11,10 @@
     "name": "Gordan Grasarevic",
     "email": "me@ggordan.com"
   },
+  "contributors": [{
+    "name": "mosvector",
+    "email": "mosvector@gmail.com"
+  }],
   "license": "MIT",
   "dependencies": {
     "gulp-util": "^2.2.17",
